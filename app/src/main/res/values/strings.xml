@@ -5,4 +5,7 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="easy">Easy</string>
+    <string name="best_score">Best Score</string>
+    <string name="timer">Timer</string>
+    <string name="start">Start</string>
 </resources>
