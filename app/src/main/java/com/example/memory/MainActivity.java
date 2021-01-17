@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         hard.setOnClickListener(v -> {
             Intent startHardActivity = new Intent(MainActivity.this, HardActivity.class);
-            Toast t = Toast.makeText(this, "Loading", Toast.LENGTH_LONG);
+            Toast t = Toast.makeText(this, "Loading", Toast.LENGTH_SHORT);
             t.show();
             startActivity(startHardActivity);
         });

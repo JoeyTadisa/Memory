@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="hard_tile_images">
+        <item>@drawable/ic_anchor</item>
+        <item>@drawable/ic_smiley</item>
+        <item>@drawable/ic_basketball</item>
+        <item>@drawable/ic_bolt</item>
+        <item>@drawable/ic_car</item>
+        <item>@drawable/ic_compass</item>
+        <item>@drawable/ic_euro</item>
+        <item>@drawable/ic_fan</item>
+        <item>@drawable/ic_fire</item>
+        <item>@drawable/ic_flask</item>
+        <item>@drawable/ic_grass</item>
+        <item>@drawable/ic_heart</item>
+        <item>@drawable/ic_leaf</item>
+        <item>@drawable/ic_moon</item>
+        <item>@drawable/ic_mug</item>
+        <item>@drawable/ic_plane</item>
+        <item>@drawable/ic_rugby</item>
+        <item>@drawable/ic_star</item>
+    </array>
+    <array name="easy_tile_images">
+        <item>@drawable/ic_leaf</item>
+        <item>@drawable/ic_moon</item>
+        <item>@drawable/ic_mug</item>
+        <item>@drawable/ic_plane</item>
+        <item>@drawable/ic_rugby</item>
+        <item>@drawable/ic_star</item>
+    </array>
+</resources>

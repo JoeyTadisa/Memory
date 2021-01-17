@@ -10,6 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Memory">
         <activity android:name=".EasyActivity"/>
+        <activity android:name=".MediumActivity"/>
+        <activity android:name=".HardActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
