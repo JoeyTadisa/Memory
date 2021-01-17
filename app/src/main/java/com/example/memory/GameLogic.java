@@ -11,9 +11,6 @@ public class GameLogic {
         indexOfPreviousTile = 0;
     }
 
-    public static boolean isMatched(int index){
-        return true;
-    }
 
     public int getNumOfFlippedTiles() {
         return numOfFlippedTiles;

@@ -43,7 +43,7 @@ public class EasyActivity extends AppCompatActivity {
                 imageButton7, imageButton8, imageButton9, imageButton10, imageButton11, imageButton12
         };
 
-        AtomicInteger drawableInt = new AtomicInteger((Integer) buttonList[pos].getTag());
+
 
        /* List<R.drawable> images = new ArrayList()<>(
                 List.of(R.drawable)
@@ -74,21 +74,27 @@ public class EasyActivity extends AppCompatActivity {
             buttonList[pos].setImageResource(R.drawable.ic_android);
             //buttonList[pos].setImageResource(R.drawable.ic_android);
             buttonList[pos].setTag(R.drawable.ic_android);
-
-            isFaceUp();
             int finalPos = pos;
+            AtomicInteger drawableInt = new AtomicInteger((Integer) buttonList[pos].getTag());
             buttonList[pos].setOnClickListener(v -> {
                 int flipped = gameLogic.getNumOfFlippedTiles();
                 if(flipped < 2){
-                    if(drawableInt.get() == R.drawable.ic_android){
+                    if(drawableInt.get() == R.drawable.ic_android){ //isFaceDown
                         setFaceUp(finalPos,buttonList,images,drawableInt);
                         gameLogic.setIndexOfPreviousTile(finalPos);
-                    }else if(drawableInt.get() == images[finalPos]){
+                    }else if(drawableInt.get() == images[finalPos]){ //isFaceUp
                         setFaceDown(finalPos,buttonList,drawableInt);
                         gameLogic.setIndexOfPreviousTile(finalPos);
                     }
-                }else if(flipped == 2){
-                    resetView(buttonList);
+                }else if(flipped == 2 && !checkForMatch(gameLogic.getIndexOfPreviousTile(),finalPos,images)){ //if 2 cards are up and they aren't the same, flipped them down
+                    resetView(buttonList, drawableInt, finalPos);
+                }else{
+                    int previousTile = gameLogic.getIndexOfPreviousTile();
+                    buttonList[finalPos].setTag(R.drawable.ic_matched);
+                    buttonList[previousTile].setTag(R.drawable.ic_matched);
+                    drawableInt.set((Integer) buttonList[finalPos].getTag());
+                    drawableInt.set((Integer) buttonList[previousTile].getTag());
+                    Toast.makeText(this, "Match!", Toast.LENGTH_SHORT).show();
                 }
                 /*if(flipped == 2){
                     int previousTile = gameLogic.getIndexOfPreviousTile();
@@ -130,17 +136,19 @@ public class EasyActivity extends AppCompatActivity {
         drawableInt.get() == R.drawable.ic_android
     }*/
 
-    private void checkForMatch(int previousTile, int finalPos, Integer [] images) throws NullPointerException{
+    private boolean checkForMatch(int previousTile, int finalPos, Integer [] images) throws NullPointerException{
         try{
             if(images[previousTile].equals(images[finalPos])){
                 int matched = gameLogic.getNumOfMatchedTiles();
-                Toast.makeText(this, "Match", Toast.LENGTH_SHORT).show();
                 matched = matched + 1;
                 gameLogic.setNumOfMatchedTiles(matched);
+            }else{
+                return false;
             }
         }catch (NullPointerException e){
             e.printStackTrace();
         }
+        return true;
     }
 
 
@@ -177,14 +185,24 @@ public class EasyActivity extends AppCompatActivity {
 
     /**
      *
-     * @param imageButtons
+     * @param buttonList
      */
-    private void resetView(ImageButton [] imageButtons) {
-        for (ImageButton ib : imageButtons) {
-            ib.setImageResource(R.drawable.ic_android);
-            //buttonList[pos].setImageResource(R.drawable.ic_android);
-            ib.setTag(R.drawable.ic_android);
-        }
+    private void resetView(ImageButton [] buttonList, AtomicInteger drawableInt, int finalPos) {
+        /*for (ImageButton ib : imageButtons) {
+            if(drawableInt.get() == R.drawable.ic_matched){
+
+            }else{
+                ib.setImageResource(R.drawable.ic_android);
+                //buttonList[pos].setImageResource(R.drawable.ic_android);
+                ib.setTag(R.drawable.ic_android);
+            }
+        }*/
+
+        buttonList[finalPos].setImageResource(R.drawable.ic_android);
+        buttonList[finalPos].setTag(R.drawable.ic_android);
+        drawableInt.set((Integer) buttonList[finalPos].getTag());
+        int previousTile = gameLogic.getIndexOfPreviousTile();
+        buttonList[previousTile].setImageResource(R.drawable.ic_android);
         gameLogic.setNumOfFlippedTiles(0);
     }
 }
